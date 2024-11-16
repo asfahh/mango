@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memoira Assistant</title>
+    <!-- Include PicoCSS from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.5/css/pico.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,11 +25,11 @@
             <label for="phone">Phone Number:</label>
             <input type="tel" id="phone" name="phone" required>
             
-            <button type="submit">Submit</button>
+            <button type="submit" class="contrast">Submit</button>
         </form>
 
         <!-- Start/Stop button for speech-to-text -->
-        <button id="startStopButton">Start Recording</button>
+        <button id="startStopButton" class="contrast">Start Recording</button>
 
         <!-- Embed iframe -->
         <iframe id="embed-preview-iframe" loading="eager" 
