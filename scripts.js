@@ -17,15 +17,29 @@ if ('webkitSpeechRecognition' in window) {
             }
         }
 
-        // Insert the text into the iframe's content
-        const iframeDoc = document.getElementById('embed-preview-iframe').contentDocument;
+         // Insert the text into the iframe's content
+        const iframe = document.getElementById('embed-preview-iframe');
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         if (iframeDoc) {
-            const textField = iframeDoc.querySelector('textarea, input'); // Adjust to target the correct field if needed
+            const textField = iframeDoc.evaluate(
+                '//*[@id="__next"]/div/main/div[1]/div/div[3]/div/div/textarea', 
+                iframeDoc, 
+                null, 
+                XPathResult.FIRST_ORDERED_NODE_TYPE, 
+                null
+            ).singleNodeValue;
+
             if (textField) {
                 textField.value = finalTranscript;
+                console.log("Text inserted into iframe:", finalTranscript);
+            } else {
+                console.warn("Text field not found in iframe.");
             }
+        } else {
+            console.warn("Iframe document not accessible.");
         }
     };
+const textField = iframeDoc.querySelector('textarea');
 
     startStopButton.addEventListener('click', () => {
         if (!isRecording) {
