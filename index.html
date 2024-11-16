@@ -7,11 +7,29 @@
     <!-- Include PicoCSS from CDN -->
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.5/css/pico.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .embed-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+        }
+        button#startStopButton {
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Memoira Assistant</h1>
-        <p>Guide interview and write up your story</p>
+        <p>Guide an interview and write up a story</p>
     </header>
     <main>
         <!-- Centered, large embed iframe -->
@@ -19,8 +37,8 @@
             <iframe id="embed-preview-iframe" loading="eager"
                     src="https://embed.pickaxeproject.com/axe?id=demo_v0_ZHWD0&mode=embed_gold&host=beta&theme=light&opacity=100&font_header=Real+Head+Pro&size_header=30&font_body=Real+Head+Pro&size_body=16&font_labels=Real+Head+Pro&size_labels=14&font_button=Real+Head+Pro&size_button=16&c_fb=F6F8FA&c_ff=FFFFFF&c_fbd=888888&c_rb=FFFFFF&c_bb=000000&c_bt=FFFFFF&c_t=000000&s_ffo=100&s_rbo=100&s_bbo=100&s_f=box&s_b=filled&s_t=0.5&s_to=1&s_r=2&image=hide&title=hide"
                     frameborder="0"></iframe>
-        <!-- Start/Stop button for speech-to-text -->
-        <button id="startStopButton" class="contrast">Start Recording</button>
+            <!-- Start/Stop button for speech-to-text -->
+            <button id="startStopButton" class="contrast">Start Recording</button>
         </div>
         <!-- Form for user data -->
         <form id="user-data-form">
@@ -35,10 +53,6 @@
             
             <button type="submit" class="contrast">Submit</button>
         </form>
-
-        
-
-        
     </main>
     <script src="scripts.js"></script>
 </body>
