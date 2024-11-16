@@ -9,15 +9,29 @@ if ('webkitSpeechRecognition' in window) {
     recognition.interimResults = true;
     recognition.lang = 'en-US';
 
+    recognition.onstart = function() {
+        console.log("Speech recognition started");
+    };
+
+    recognition.onend = function() {
+        console.log("Speech recognition ended");
+    };
+
+    recognition.onerror = function(event) {
+        console.error("Speech recognition error:", event.error);
+    };
+
     recognition.onresult = function(event) {
         let finalTranscript = '';
+        console.log("Speech recognition onresult event:", event);
         for (let i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
                 finalTranscript += event.results[i][0].transcript;
+                console.log("Final transcript:", finalTranscript);
             }
         }
 
-         // Insert the text into the iframe's content
+        // Insert the text into the iframe's content
         const iframe = document.getElementById('embed-preview-iframe');
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         if (iframeDoc) {
@@ -39,7 +53,6 @@ if ('webkitSpeechRecognition' in window) {
             console.warn("Iframe document not accessible.");
         }
     };
-const textField = iframeDoc.querySelector('textarea');
 
     startStopButton.addEventListener('click', () => {
         if (!isRecording) {
