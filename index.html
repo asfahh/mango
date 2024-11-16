@@ -3,77 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memoira - Your Story, Forever Told</title>
+    <title>Memoira Assistant</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Memoira Assistant</h1>
+        <p>Guide interview and write up your story</p>
     </header>
-    <section id="home" class="banner">
-        <div class="banner-text">
-            <h1>Memoira - Your Story, Forever Told</h1>
-            <p>Using AI to help you write and share your life story.</p>
-            <button>Get Started</button>
-        </div>
-    </section>
-    <section id="about">
-        <h2>About Us</h2>
-        <p>At Memoira, we believe every story is worth sharing. Our AI-driven platform helps you document and preserve your life story, creating a lasting legacy.</p>
-    </section>
-    <section id="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <h3>Step 1</h3>
-                <p>Engage with our AI interviewer.</p>
-            </div>
-            <div class="step">
-                <h3>Step 2</h3>
-                <p>Edit and save your drafts in the cloud.</p>
-            </div>
-            <div class="step">
-                <h3>Step 3</h3>
-                <p>Print your biography on demand.</p>
-            </div>
-        </div>
-    </section>
-    <section id="testimonials">
-        <h2>Testimonials</h2>
-        <blockquote>
-            <p>Memoira helped me capture my life's journey in a way I never could have done alone.</p>
-            <footer>- Elderly User</footer>
-        </blockquote>
-        <blockquote>
-            <p>Now, my grandkids will always know their grandmother's incredible story.</p>
-            <footer>- Family Member</footer>
-        </blockquote>
-        <blockquote>
-            <p>Our residents found new purpose in sharing their life stories.</p>
-            <footer>- Retirement Home Manager</footer>
-        </blockquote>
-    </section>
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form>
+    <main>
+        <!-- Form for user data -->
+        <form id="user-data-form">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            
             <button type="submit">Submit</button>
         </form>
-    </section>
+
+        <!-- Start/Stop button for speech-to-text -->
+        <button id="startStopButton">Start Recording</button>
+
+        <!-- Embed iframe -->
+        <iframe id="embed-preview-iframe" loading="eager" 
+                src="https://embed.pickaxeproject.com/axe?id=demo_v0_ZHWD0&mode=embed_gold&host=beta&theme=light&opacity=100&font_header=Real+Head+Pro&size_header=30&font_body=Real+Head+Pro&size_body=16&font_labels=Real+Head+Pro&size_labels=14&font_button=Real+Head+Pro&size_button=16&c_fb=F6F8FA&c_ff=FFFFFF&c_fbd=888888&c_rb=FFFFFF&c_bb=000000&c_bt=FFFFFF&c_t=000000&s_ffo=100&s_rbo=100&s_bbo=100&s_f=box&s_b=filled&s_t=0.5&s_to=1&s_r=2&image=hide&title=hide"
+                width="100%" height="500px" 
+                style="border:1px solid #000; border-radius: 4px; max-width: 700px;"
+                frameborder="0"></iframe>
+    </main>
     <script src="scripts.js"></script>
 </body>
 </html>
