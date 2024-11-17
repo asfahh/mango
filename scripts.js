@@ -1,11 +1,28 @@
 document.addEventListener("DOMContentLoaded", function() {
     const startStopButton = document.getElementById('startStopButton');
+    const iframe = document.getElementById('embed-preview-iframe');
     let recognition;
     let isRecording = false;
 
+    // Function to handle speech results
+    function handleSpeechResults(event) {
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalTranscript += event.results[i][0].transcript;
+            }
+        }
+
+        // Send text to the iframe using postMessage
+        if (iframe) {
+            iframe.contentWindow.postMessage({ type: 'speechToText', text: finalTranscript }, '*');
+            console.log("Text sent to iframe:", finalTranscript);
+        }
+    }
+
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
-        recognition.continuous = true; // For continuous transcription
+        recognition.continuous = true;
         recognition.interimResults = true;
         recognition.lang = 'en-US';
 
@@ -27,31 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
             startStopButton.style.backgroundColor = '';
         };
 
-        recognition.onresult = function(event) {
-            let finalTranscript = '';
-            console.log("Speech recognition onresult event:", event);
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    finalTranscript += event.results[i][0].transcript;
-                    console.log("Final transcript:", finalTranscript);
-                }
-            }
-
-            // Insert the text into the iframe's content
-            const iframe = document.getElementById('embed-preview-iframe');
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            if (iframeDoc) {
-                const textField = iframeDoc.querySelector('textarea'); // Using querySelector for simplicity
-                if (textField) {
-                    textField.value = finalTranscript;
-                    console.log("Text inserted into iframe:", finalTranscript);
-                } else {
-                    console.warn("Text field not found in iframe.");
-                }
-            } else {
-                console.warn("Iframe document not accessible.");
-            }
-        };
+        recognition.onresult = handleSpeechResults;
 
         startStopButton.addEventListener('click', () => {
             if (!isRecording) {
