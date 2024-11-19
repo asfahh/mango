@@ -1,3 +1,5 @@
+const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition || null;
+
 document.addEventListener("DOMContentLoaded", function() {
     const startStopButton = document.getElementById('startStopButton');
     const iframe = document.getElementById('embed-preview-iframe');
@@ -20,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    if ('webkitSpeechRecognition' in window) {
-        recognition = new webkitSpeechRecognition();
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
         recognition.lang = 'en-US';
